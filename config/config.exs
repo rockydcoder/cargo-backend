@@ -9,6 +9,9 @@ config :cargo, Cargo.Repo,
 
 config :cargo, ecto_repos: [Cargo.Repo]
 
+config :maru, Cargo.API,
+  http: [port: 8880]
+
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
