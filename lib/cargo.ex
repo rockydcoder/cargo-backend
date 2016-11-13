@@ -31,3 +31,64 @@ defmodule Cargo.Vehicle do
     field :reg_no, :string
   end
 end
+
+defmodule Cargo.Activity do
+  use Ecto.Schema
+
+  schema "activity" do
+    field :date_of_pickup, Ecto.Date
+    field :date_of_delivery, Ecto.Date
+    field :status, :string
+    field :pickup_location, :string
+    field :drop_location, :string
+    field :payment_mode, :string
+    field :payment_status, :string
+    field :payment_ref_no, :string
+    field :gross_amount, :float
+    field :paid_amount, :float
+    field :net_amount, :float
+  end
+end
+
+defmodule Cargo.Loyalty do
+  use Ecto.Schema
+
+  schema "loyalties" do
+    field :trip_no, :string
+    field :coupon_used, :string
+  end
+end
+
+defmodule Cargo.Partners do
+  use Ecto.Schema
+
+  schema "partners" do
+    field :name_of_company, :string
+    field :contact_person_name, :string
+    field :contact_person_number, :string
+    field :vehicles_registered, :integer
+    field :reg_no, :string
+  end
+end
+
+defmodule Cargo.Gps do
+  use Ecto.Schema
+
+  schema "gps" do
+    field :device_name, :string
+    field :date_of_attachment, :string
+    field :sim_number, :string
+  end
+end
+
+defmodule Cargo.Bookings do
+  use Ecto.Schema
+
+  schema "bookings" do
+    field :date_of_booking, Ecto.Date
+    field :date_of_shipment, Ecto.Date
+    field :vehicle_reg_no, :string
+    field :merchant_reg_no, :string
+  end
+
+end
