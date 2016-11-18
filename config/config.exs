@@ -2,7 +2,7 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :cargo, Cargo.Repo,
+config :cargo, Cargo.Repo.Activities,
   adapter: Ecto.Adapters.Postgres,
   database: "cargo_repo",
   hostname: "localhost"

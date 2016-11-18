@@ -12,6 +12,7 @@ defmodule Cargo.API do
 
   mount Cargo.Router.Homepage
   mount Cargo.Router.Vehicles
+  mount Cargo.Router.Activities
 
   before do
     plug Plug.Logger
@@ -23,7 +24,7 @@ defmodule Cargo.API do
   end
 
 
-rescue_from Unauthorized, as: e do
+  rescue_from Unauthorized, as: e do
         IO.inspect e
         conn
         |> put_status(401)

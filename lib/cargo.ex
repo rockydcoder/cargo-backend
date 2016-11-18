@@ -23,30 +23,24 @@ end
 defmodule Cargo.Vehicle do
   use Ecto.Schema
 
-  schema "vehicle" do
+  @primary_key {:reg_no, :string, []}
+  schema "vehicles" do
     field :driver_name, :string
     field :truck_name, :string
     field :base_location, :string
     field :current_location, :string
-    field :reg_no, :string
   end
 end
 
 defmodule Cargo.Activity do
   use Ecto.Schema
 
-  schema "activity" do
+  schema "activities" do
     field :date_of_pickup, Ecto.Date
     field :date_of_delivery, Ecto.Date
     field :status, :string
     field :pickup_location, :string
     field :drop_location, :string
-    field :payment_mode, :string
-    field :payment_status, :string
-    field :payment_ref_no, :string
-    field :gross_amount, :float
-    field :paid_amount, :float
-    field :net_amount, :float
   end
 end
 
@@ -90,5 +84,39 @@ defmodule Cargo.Bookings do
     field :vehicle_reg_no, :string
     field :merchant_reg_no, :string
   end
-
 end
+
+
+defmodule Cargo.Payments do
+  use Ecto.Schema
+  @primary_key{:payment_ref_no, :string, []}
+  schema "payments" do
+    field :payment_mode, :string
+    field :payment_status, :string
+    field :gross_amount, :float
+    field :paid_amount, :float
+    field :net_amount, :float
+  end
+end
+
+  defmodule Cargo.Transits do
+    use Ecto.Schema
+
+    schema "transits" do
+      field :date, Ecto.Date
+      field :place, :string
+      field :status, :string
+    end
+  end
+
+  defmodule Cargo.Merchants do
+    use Ecto.Schema
+
+    @primary_key{:licence_number, :string, []}
+    schema "merchants" do
+      field :name_of_company, :string
+      field :merchant_name, :string
+      field :contact_number, :string
+    end
+
+  end
