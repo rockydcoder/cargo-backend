@@ -99,24 +99,24 @@ defmodule Cargo.Payments do
   end
 end
 
-  defmodule Cargo.Transits do
-    use Ecto.Schema
+defmodule Cargo.Transits do
+  use Ecto.Schema
 
-    schema "transits" do
-      field :date, Ecto.Date
-      field :place, :string
-      field :status, :string
-    end
+  schema "transits" do
+    field :date, Ecto.Date
+    field :place, :string
+    field :status, :string
   end
+end
 
-  defmodule Cargo.Merchants do
-    use Ecto.Schema
+defmodule Cargo.Merchants do
+  use Ecto.Schema
 
-    @primary_key{:licence_number, :string, []}
-    schema "merchants" do
-      field :name_of_company, :string
-      field :merchant_name, :string
-      field :contact_number, :string
-    end
+  @primary_key{:licence_number, :string, []}
+  schema "merchants" do
+    field :name_of_company, :string
+    field :merchant_name, :string
+    field :contact_number, :string
+  end
 
   end

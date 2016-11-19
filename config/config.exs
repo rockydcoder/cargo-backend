@@ -2,7 +2,27 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :cargo, Cargo.Repo.Activities,
+# config :cargo, Cargo.Repo.Activities,
+#   adapter: Ecto.Adapters.Postgres,
+#   database: "cargo_repo",
+#   hostname: "localhost"
+#
+# config :cargo, Cargo.Repo.Loyalties,
+#   adapter: Ecto.Adapters.Postgres,
+#   database: "cargo_repo",
+#   hostname: "localhost"
+#
+# config :cargo, Cargo.Repo.Vehicles,
+#   adapter: Ecto.Adapters.Postgres,
+#   database: "cargo_repo",
+#   hostname: "localhost"
+#
+# config :cargo, Cargo.Repo.Partners,
+#   adapter: Ecto.Adapters.Postgres,
+#   database: "cargo_repo",
+#   hostname: "localhost"
+
+config :cargo, Cargo.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "cargo_repo",
   hostname: "localhost"
