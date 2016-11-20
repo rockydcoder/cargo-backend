@@ -33,7 +33,7 @@ defmodule Cargo.Router.Vehicles do
       end
     end
 
-    @desc "get vehicle by field name"
+    @desc "get vehicle by applying multiple conditions"
     params do
       requires :conditions, type: List do
         requires :key, type: String

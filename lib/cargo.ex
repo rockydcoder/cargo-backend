@@ -118,5 +118,20 @@ defmodule Cargo.Merchants do
     field :merchant_name, :string
     field :contact_number, :string
   end
+end
 
+defmodule Cargo.Trips do
+  use Ecto.Schema
+
+  schema "trips" do
+    field :start_date, Ecto.Date
+    field :end_date, Ecto.Date
+    field :start_place, :string
+    field :end_place, :string
+    field :vehicle_reg_no, :string
+    field :status, :string
+    field :incurred_cost, :float
+    field :round_trip_cost, :float
   end
+
+end
