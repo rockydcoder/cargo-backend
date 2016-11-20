@@ -35,11 +35,13 @@ defmodule Cargo.Router.Vehicles do
 
     @desc "get vehicle by field name"
     params do
-      requires :field_name, type: String
-      requires :field_value, type: String
+      requires :conditions, type: List do
+        requires :key, type: String
+        requires :value, type: String
+      end
     end
     post do
-      vehicles = DB.getVehiclesByGenericField(params)
+      vehicles = DB.getVehiclesByMultipleFields(params)
       conn
       |> put_status(200)
       |> json(vehicles)

@@ -29,4 +29,24 @@ defmodule Cargo.Repo.Vehicles do
     |> Cargo.Repo.all
   end
 
+  def getVehiclesByMultipleFields(params) do
+    conditions = params[:conditions]
+    query = from vehicle in Cargo.Vehicle,
+        select: (
+            %{ driver_name: vehicle.driver_name, truck_name: vehicle.truck_name, base_location: vehicle.base_location, current_location: vehicle.current_location, reg_no: vehicle.reg_no }
+        )
+    query = applyCriteria(conditions, query)
+    query |> Cargo.Repo.all
+  end
+
+  def applyCriteria([head | tail], query) do
+    newQuery = from vehicle in query,
+      where: field(vehicle, ^String.to_existing_atom(head.key)) == ^head.value
+    applyCriteria(tail, newQuery)
+  end
+
+  def applyCriteria([], query) do
+    query
+  end
+
 end
