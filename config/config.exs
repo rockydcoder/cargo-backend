@@ -25,7 +25,9 @@ use Mix.Config
 config :cargo, Cargo.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "cargo_repo",
-  hostname: "localhost"
+  hostname: "cargoonwheels.cx3qkv9omyrn.us-west-2.rds.amazonaws.com",
+  username: "cargouser",
+  password: "sekhar_007"
 
 config :cargo, ecto_repos: [Cargo.Repo]
 
