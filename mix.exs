@@ -30,6 +30,7 @@ defmodule Cargo.Mixfile do
   defp deps do
     [{:maru, "~> 0.10"},
     {:ecto, "~> 2.0"},
-   {:postgrex, "~> 0.11"}]
+   {:postgrex, "~> 0.11"},
+   {:poison, "~> 2.0"}]
   end
 end

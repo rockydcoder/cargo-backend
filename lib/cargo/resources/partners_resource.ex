@@ -15,8 +15,8 @@ defmodule Cargo.Router.Partners do
 
     @desc "get partner by field name"
     params do
-      requires :field_name, type: String
-      requires :field_value, type: String
+      requires :fieldName, type: String
+      requires :fieldValue, type: String
     end
     post do
       partners = DB.getPartnersByGenericField(params)

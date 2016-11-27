@@ -13,6 +13,8 @@ defmodule Cargo.API do
   mount Cargo.Router.Homepage
   mount Cargo.Router.Vehicles
   mount Cargo.Router.Activities
+  mount Cargo.Router.PriceChart
+  mount Cargo.Router.Trips
 
   before do
     plug Plug.Logger

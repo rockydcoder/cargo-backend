@@ -1,5 +1,4 @@
 defmodule Cargo.Repo.Merchants do
-  alias Cargo.Repo
   import Ecto.Query
   require Logger
 
@@ -17,7 +16,7 @@ defmodule Cargo.Repo.Merchants do
         select: (
           %{ licence_number: merchant.licence_number, name_of_company: merchant.name_of_company, merchant_name: merchant.merchant_name, contact_number: merchant.contact_number }
         ),
-        where: field(merchant, ^String.to_existing_atom(params[:field_name])) == ^params[:field_value]
+        where: field(merchant, ^String.to_existing_atom(params[:fieldName])) == ^params[:fieldValue]
     query
     |> Cargo.Repo.all
   end

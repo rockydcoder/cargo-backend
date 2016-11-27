@@ -5,6 +5,36 @@ defmodule Cargo.Router.Vehicles do
 
   namespace :vehicles do
 
+    namespace :select do
+        @desc "select vehicle based on param values"
+        params do
+            requires :regNos, type: List[String]
+        end
+        post do
+            vehicles = DB.selectVehicle(params)
+            vehicleMap = %{:results=>vehicles}
+            conn
+            |> put_status(200)
+            |> json(vehicleMap)
+        end
+    end
+
+    namespace :new do
+        @desc "add a new vehicle"
+          params do
+            requires :vehicleName, type: String
+            requires :driverName, type: String
+            requires :baseLocation, type: String
+            requires :currentLocation, type: String
+            requires :scheduledTrips, type: String
+          end
+          post do
+            DB.addVehicle(params)
+            conn
+            |> send_resp(201, "")
+          end
+    end
+
     @desc "get all vehicles"
     get do
       vehicles = DB.getVehicles
@@ -46,5 +76,6 @@ defmodule Cargo.Router.Vehicles do
       |> put_status(200)
       |> json(vehicles)
     end
+
   end
 end

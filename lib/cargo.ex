@@ -26,9 +26,10 @@ defmodule Cargo.Vehicle do
   @primary_key {:reg_no, :string, []}
   schema "vehicles" do
     field :driver_name, :string
-    field :truck_name, :string
+    field :vehicle_name, :string
     field :base_location, :string
     field :current_location, :string
+    field :scheduled_trips, :integer
   end
 end
 
@@ -124,14 +125,30 @@ defmodule Cargo.Trips do
   use Ecto.Schema
 
   schema "trips" do
-    field :start_date, Ecto.Date
-    field :end_date, Ecto.Date
+    field :start_date, Ecto.DateTime
+    field :end_date, Ecto.DateTime
     field :start_place, :string
     field :end_place, :string
     field :vehicle_reg_no, :string
     field :status, :string
     field :incurred_cost, :float
     field :round_trip_cost, :float
+    field :vehicle_name, :string
+    field :price_charged, :float
   end
+end
 
+defmodule Cargo.PriceChart do
+    use Ecto.Schema
+
+    schema "price_chart" do
+        field :vehicle_name, :string
+        field :vehicle_type, :string
+        field :length, :float
+        field :breadth, :float
+        field :height, :float
+        field :price_per_km, :float
+        field :stay_charge_per_hour, :float
+        field :capacity, :float
+    end
 end

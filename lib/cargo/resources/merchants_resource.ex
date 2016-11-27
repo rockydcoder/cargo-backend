@@ -15,8 +15,8 @@ defmodule Cargo.Router.Merchants do
 
     @desc "get merchant by field name"
     params do
-      requires :field_name, type: String
-      requires :field_value, type: String
+      requires :fieldName, type: String
+      requires :fieldValue, type: String
     end
     post do
       merchants = DB.getMercantsByGenericField(params)
