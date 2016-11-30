@@ -3,7 +3,7 @@ defmodule Cargo.Router.Partners do
   alias Cargo.Repo.Partners, as: DB
   require Logger
 
-  namespace :Partners do
+  namespace :partners do
 
     @desc "get all partners"
     get do

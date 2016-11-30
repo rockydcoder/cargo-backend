@@ -12,7 +12,7 @@ defmodule Cargo.Router.Vehicles do
         end
         post do
             vehicles = DB.selectVehicle(params)
-            vehicleMap = %{:results=>vehicles}
+            vehicleMap = %{:results => vehicles}
             conn
             |> put_status(200)
             |> json(vehicleMap)

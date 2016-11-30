@@ -5,7 +5,7 @@ defmodule Cargo.Repo.Vehicles do
   def getVehicles do
     query = from vehicle in Cargo.Vehicle,
     select: (
-        %{ driver_name: vehicle.driver_name, vehicle_name: vehicle.vehicle_name, base_location: vehicle.base_location, current_location: vehicle.current_location, reg_no: vehicle.reg_no, scheduled_trips: vehicle.scheduled_trips }
+        %{ driverName: vehicle.driver_name, vehicleName: vehicle.vehicle_name, baseLocation: vehicle.base_location, currentLocation: vehicle.current_location, regNo: vehicle.reg_no, scheduledTrips: vehicle.scheduled_trips }
     )
     query |> Cargo.Repo.all
   end
@@ -13,7 +13,7 @@ defmodule Cargo.Repo.Vehicles do
   def getVehicle(params) do
     query = from vehicle in Cargo.Vehicle,
     select: (
-        %{ driver_name: vehicle.driver_name, vehicle_name: vehicle.vehicle_name, base_location: vehicle.base_location, current_location: vehicle.current_location, reg_no: vehicle.reg_no, scheduled_trips: vehicle.scheduled_trips }
+        %{ driverName: vehicle.driver_name, vehicleName: vehicle.vehicle_name, baseLocation: vehicle.base_location, currentLocation: vehicle.current_location, regNo: vehicle.reg_no, scheduledTrips: vehicle.scheduled_trips }
     )
     query |> Cargo.Repo.get(params[:id])
   end
@@ -21,7 +21,7 @@ defmodule Cargo.Repo.Vehicles do
   def getVehiclesByGenericField(params) do
     query = from vehicle in Cargo.Vehicle,
     select: (
-        %{ driver_name: vehicle.driver_name, vehicle_name: vehicle.vehicle_name, base_location: vehicle.base_location, current_location: vehicle.current_location, reg_no: vehicle.reg_no, scheduled_trips: vehicle.scheduled_trips }
+        %{ driver_name: vehicle.driver_name, vehicleName: vehicle.vehicle_name, baseLocation: vehicle.base_location, currentLocation: vehicle.current_location, regNo: vehicle.reg_no, scheduledTrips: vehicle.scheduled_trips }
     ),
     where: field(vehicle, ^String.to_existing_atom(params[:fieldName])) == ^params[:fieldValue]
     query
@@ -32,7 +32,7 @@ defmodule Cargo.Repo.Vehicles do
     conditions = params[:conditions]
     query = from vehicle in Cargo.Vehicle,
     select: (
-        %{ driver_name: vehicle.driver_name, vehicle_name: vehicle.vehicle_name, base_location: vehicle.base_location, current_location: vehicle.current_location, reg_no: vehicle.reg_no, scheduled_trips: vehicle.scheduled_trips }
+        %{ driverName: vehicle.driver_name, vehicleName: vehicle.vehicle_name, baseLocation: vehicle.base_location, currentLocation: vehicle.current_location, regNo: vehicle.reg_no, scheduledTrips: vehicle.scheduled_trips }
     )
     query = applyCriteria(conditions, query)
     query |> Cargo.Repo.all
@@ -51,7 +51,7 @@ defmodule Cargo.Repo.Vehicles do
   def selectVehicle(params) do
     query = from vehicle in Cargo.Vehicle,
         select: (
-            %{regNo: vehicle.reg_no, base_location: vehicle.base_location, current_location: vehicle.current_location, driver_name: vehicle.driver_name, scheduled_trips: vehicle.scheduled_trips}
+            %{regNo: vehicle.reg_no, baseLocation: vehicle.base_location, currentLocation: vehicle.current_location, driverName: vehicle.driver_name, scheduledTrips: vehicle.scheduled_trips}
         ),
         where: vehicle.reg_no in ^params[:regNos]
 
@@ -60,11 +60,11 @@ defmodule Cargo.Repo.Vehicles do
 
   def addVehicle(params) do
     Cargo.Repo.insert! %Cargo.Vehicle {
-        driver_name: params[:driver_name],
-        vehicle_name: params[:vehicle_name],
-        base_location: params[:base_location],
-        current_location: params[:current_location],
-        scheduled_trips: params[:scheduled_trips]
+        driver_name: params[:driverName],
+        vehicle_name: params[:vehicleName],
+        base_location: params[:baseLocation],
+        current_location: params[:currentLocation],
+        scheduled_trips: params[:scheduledTrips]
     }
   end
 end

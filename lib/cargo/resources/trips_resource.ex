@@ -23,9 +23,10 @@ defmodule Cargo.Router.Trips do
         end
         post do
           trips = DB.selectTrip(params)
+          tripsMap = %{:results=>trips}
           conn
           |> put_status(200)
-          |> json(trips)
+          |> json(tripsMap)
         end
     end
 
@@ -42,6 +43,7 @@ defmodule Cargo.Router.Trips do
             requires :roundTripCost, type: Float
             requires :vehicleName, type: String
             requires :priceCharged, type: Float
+            requires :exclusiveCost, type: Float
         end
         post do
             DB.addTrip(params)

@@ -3,19 +3,40 @@ defmodule Cargo.Router.PriceChart do
     alias Cargo.Repo.PriceChart, as: DB
     require Logger
 
+
     namespace :price_chart do
 
-        @desc "get price_chart for vehicles shortlisted based on lxbxh limit"
-        params do
-          requires :length, type: Float
-          requires :breadth, type: Float
-          requires :height, type: Float
+        namespace :select do
+            @desc "get price_chart for vehicles shortlisted based on vehicle name or lxbxh limit"
+            params do
+                optional :capacity, type: Capacity
+                optional :vehicleName, type: String
+            end
+            post do
+                priceChart = DB.getPriceChartForShortlistedVehicles(params)
+                priceChartMap = %{:result => priceChart}
+                conn
+                    |> put_status(200)
+                    |> json(priceChartMap)
+            end
         end
-        post do
-            price_chart = DB.getPriceChartForShortlistedVehicles(params)
-            conn
-            |> put_status(200)
-            |> json(price_chart)
+
+        namespace :new do
+            @desc "add a new price_chart"
+            params do
+              requires :vehicleName, type: String
+              requires :vehicleType, type: String
+              requires :length, type: Float
+              requires :breadth, type: Float
+              requires :height, type: Float
+            end
+            post do
+              DB.addPriceChart(params)
+              conn
+              |> send_resp(201, "")
+            end
         end
     end
+
 end
+

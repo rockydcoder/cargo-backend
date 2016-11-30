@@ -90,6 +90,7 @@ end
 
 defmodule Cargo.Payments do
   use Ecto.Schema
+
   @primary_key{:payment_ref_no, :string, []}
   schema "payments" do
     field :payment_mode, :string
