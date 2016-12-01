@@ -1,6 +1,5 @@
 defmodule Maru.Types.Capacity do
   use Maru.Type
-  use Ecto.Schema
 
 end
 
