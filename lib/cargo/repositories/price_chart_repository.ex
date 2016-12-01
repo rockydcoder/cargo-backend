@@ -18,16 +18,18 @@ defmodule Cargo.Repo.PriceChart do
     end
 
     defp fetchRequiredVolume(params) do
+        capacityJson =
         if (Map.has_key?(params, :capacity)) do
-            capacityJson = Poison.Encoder.encode(params[:capacity], [])
-            Poison.decode!(~s(#{capacityJson}), as: %Volume{})
+            Poison.Encoder.encode(params[:capacity], [])
         else
             priceChartResult = fetchPriceChart(params)
             priceChartAsJson = Poison.Encoder.encode(List.first(priceChartResult), [])
             priceChart = Poison.decode!(~s(#{priceChartAsJson}), as: %PriceChart{})
 
-            Poison.decode!(~s({"length": #{priceChart.length}, "breadth": #{priceChart.breadth}, "height": #{priceChart.height}}), as: %Volume{})
-       end
+            ~s({"length": #{priceChart.length}, "breadth": #{priceChart.breadth}, "height": #{priceChart.height}})
+        end
+
+        Poison.decode!(~s(#{capacityJson}), as: %Volume{})
     end
 
     defp selectPriceChartFromVolume(volume) do
