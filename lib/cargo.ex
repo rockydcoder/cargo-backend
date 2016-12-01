@@ -82,7 +82,7 @@ defmodule Cargo.Partners do
 
   @primary_key {:reg_no, :string, []}
   schema "partners" do
-    field :company_schema, :string
+    field :company_name, :string
     field :contact_person_name, :string
     field :contact_person_number, :string
     field :fleet_size, :integer
