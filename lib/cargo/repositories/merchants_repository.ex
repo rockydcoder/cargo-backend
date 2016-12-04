@@ -5,7 +5,7 @@ defmodule Cargo.Repo.Merchants do
   def getMerchants do
     query = from merchant in Cargo.Merchants,
     select: (
-    %{ licence_number: merchant.licence_number, name_of_company: merchant.name_of_company, merchant_name: merchant.merchant_name, contact_number: merchant.contact_number }
+      %{ licenseNumber: merchant.licence_number, companyName: merchant.company_name, merchantName: merchant.merchant_name, contactNumber: merchant.contact_number }
     )
     query
     |> Cargo.Repo.all
@@ -14,11 +14,32 @@ defmodule Cargo.Repo.Merchants do
   def getMercantsByGenericField(params) do
     query = from merchant in Cargo.Merchants,
         select: (
-          %{ licence_number: merchant.licence_number, name_of_company: merchant.name_of_company, merchant_name: merchant.merchant_name, contact_number: merchant.contact_number }
+        %{ licenseNumber: merchant.licence_number, companyName: merchant.company_name, merchantName: merchant.merchant_name, contactNumber: merchant.contact_number }
+
         ),
         where: field(merchant, ^String.to_existing_atom(params[:fieldName])) == ^params[:fieldValue]
     query
     |> Cargo.Repo.all
+  end
+
+  def getMerchantById(params) do
+    query = from merchant in Cargo.Merchants,
+    select: (
+    %{ licenseNumber: merchant.licence_number, companyName: merchant.company_name, merchantName: merchant.merchant_name, contactNumber: merchant.contact_number }
+    ),
+    where: field(merchant, :licence_number) == ^params[:licence_number]
+    query
+    |> Cargo.Repo.all
+  end
+
+  def addMerchant(params) do
+    Cargo.Repo.insert! %Cargo.Merchants {
+      company_name: params[:companyName],
+      merchant_name: params[:merchantName],
+      contact_number: params[:contactNumber],
+      licence_number: params[:licenseNumber]
+
+    }
   end
 
 end

@@ -160,3 +160,14 @@ defmodule Cargo.Trips do
   end
 end
 
+defmodule Cargo.MerchantUsers do
+  use Ecto.Schema
+  
+  @primary_key{:id, :string, []}
+  schema "merchants_users" do
+    field :username, :string
+    field :password, :string
+    field :licence_number, :string
+  end
+
+end

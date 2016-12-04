@@ -15,6 +15,8 @@ defmodule Cargo.API do
   mount Cargo.Router.Activities
   mount Cargo.Router.PriceChart
   mount Cargo.Router.Trips
+  mount Cargo.Router.Merchants
+  mount Cargo.Router.MerchantUsers
 
   before do
     plug Plug.Logger

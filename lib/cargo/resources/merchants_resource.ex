@@ -24,5 +24,22 @@ defmodule Cargo.Router.Merchants do
       |> put_status(200)
       |> json(merchants)
     end
+
+    namespace :new do
+      @desc "add a new merchant"
+      params do
+        requires :merchantName, type: String
+        requires :companyName, type: String
+        requires :contactNumber, type: String
+        requires :licenseNumber, type: String
+      end
+      post do
+        DB.addMerchant(params)
+        conn
+        |> send_resp(201, "")
+      end
+    end
   end
+
+
 end
