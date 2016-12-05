@@ -1,6 +1,7 @@
 defmodule Cargo.Repo.Trips do
   import Ecto.Query
   require Logger
+  alias Cargo.Repo.Vehicles, as: VehiclesRepo
 
   def selectTrip(params) do
     start_date = Ecto.DateTime.cast!(params[:startDate])
@@ -27,8 +28,6 @@ defmodule Cargo.Repo.Trips do
         where: trip.end_date <= ^start_date,
         # ignore trips older than current time
         where: trip.end_date >= ^Ecto.DateTime.utc,
-        # select trip as a preceding only if it's not LOCKED yet'
-        where: trip.status == "AVAILABLE",
         where: trip.end_place == ^params[:startPlace],
         where: trip.vehicle_name in ^params[:vehicleNames]
 
