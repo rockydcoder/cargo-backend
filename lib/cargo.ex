@@ -105,8 +105,8 @@ end
 defmodule Cargo.PriceChart do
     use Ecto.Schema
 
+    @primary_key{:vehicle_name, :string, []}
     schema "price_chart" do
-        field :vehicle_name, :string
         field :vehicle_type, :string
         field :length, :float
         field :breadth, :float
@@ -115,19 +115,6 @@ defmodule Cargo.PriceChart do
         field :stay_charge_per_hour, :float
         field :capacity, :float
     end
-end
-
-defmodule Cargo.Vehicle do
-  use Ecto.Schema
-
-  @primary_key {:reg_no, :string, []}
-  schema "vehicles" do
-    field :driver_name, :string
-    field :vehicle_name, :string
-    field :base_location, :string
-    field :current_location, :string
-    field :scheduled_trips, :integer
-  end
 end
 
 defmodule Cargo.Transits do
@@ -162,7 +149,7 @@ end
 
 defmodule Cargo.MerchantUsers do
   use Ecto.Schema
-  
+
   @primary_key{:id, :string, []}
   schema "merchants_users" do
     field :username, :string
@@ -170,4 +157,16 @@ defmodule Cargo.MerchantUsers do
     field :licence_number, :string
   end
 
+end
+defmodule Cargo.Vehicle do
+  use Ecto.Schema
+
+  @primary_key {:reg_no, :string, []}
+  schema "vehicles" do
+    field :driver_name, :string
+    field :vehicle_name, :string
+    field :base_location, :string
+    field :current_location, :string
+    field :scheduled_trips, :integer
+  end
 end

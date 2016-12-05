@@ -23,8 +23,11 @@ defmodule Cargo.Repo.Trips do
         select: (
            %{ vehicleRegNo: trip.vehicle_reg_no, incurredCost: trip.incurred_cost, roundTripCost: trip.round_trip_cost, priceCharged: trip.price_charged, startDate: trip.start_date, endDate: trip.end_date }
         ),
+        # preceding trip->end_date should be less than upcoming start_date
         where: trip.end_date <= ^start_date,
-        where: trip.end_date >= datetime_add(^Ecto.DateTime.utc, -1, "week"),
+        # ignore trips older than current time
+        where: trip.end_date >= ^Ecto.DateTime.utc,
+        # select trip as a preceding only if it's not LOCKED yet'
         where: trip.status == "AVAILABLE",
         where: trip.end_place == ^params[:startPlace],
         where: trip.vehicle_name in ^params[:vehicleNames]

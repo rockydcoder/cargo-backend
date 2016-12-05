@@ -13,6 +13,13 @@ defmodule Cargo.Router.Trips do
               requires :startDate, type: String
               requires :vehicleNames, type: List[String]
             end
+            post do
+              trips = DB.selectPrecedingTripsPossible(params)
+              tripsMap = %{:results=>trips}
+              conn
+                |> put_status(200)
+                |> json(tripsMap)
+            end
         end
 
         @desc "select a trip"

@@ -9,7 +9,7 @@ defmodule Cargo.Router.PriceChart do
         namespace :select do
             @desc "get price_chart for vehicles shortlisted based on vehicle name or lxbxh limit"
             params do
-                optional :capacity, type: Capacity
+                optional :volume, type: Capacity
                 optional :vehicleName, type: String
             end
             post do
@@ -29,6 +29,9 @@ defmodule Cargo.Router.PriceChart do
               requires :length, type: Float
               requires :breadth, type: Float
               requires :height, type: Float
+              requires :pricePerKm, type: Float
+              requires :stayChargePerHour, type: Float
+              requires :capacity, type: Float
             end
             post do
               DB.addPriceChart(params)

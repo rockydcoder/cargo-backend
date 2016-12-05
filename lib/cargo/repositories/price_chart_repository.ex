@@ -13,14 +13,17 @@ defmodule Cargo.Repo.PriceChart do
             vehicle_type: params[:vehicleType],
             length: params[:length],
             breadth: params[:breadth],
-            height: params[:height]
+            height: params[:height],
+            price_per_km: params[:pricePerKm],
+            stay_charge_per_hour: params[:stayChargePerHour],
+            capacity: params[:capacity]
         }
     end
 
     defp fetchRequiredVolume(params) do
         capacityJson =
-        if (Map.has_key?(params, :capacity)) do
-            Poison.Encoder.encode(params[:capacity], [])
+        if (Map.has_key?(params, :volume)) do
+            Poison.Encoder.encode(params[:volume], [])
         else
             priceChartResult = fetchPriceChart(params)
             priceChartAsJson = Poison.Encoder.encode(List.first(priceChartResult), [])
@@ -35,7 +38,7 @@ defmodule Cargo.Repo.PriceChart do
     defp selectPriceChartFromVolume(volume) do
         query = from price_chart in Cargo.PriceChart,
             select: (
-                %{vehicleName: price_chart.vehicle_name, length: price_chart.length, breadth: price_chart.breadth, height: price_chart.height}
+                %{vehicleName: price_chart.vehicle_name, vehicleType: price_chart.vehicle_type, length: price_chart.length, breadth: price_chart.breadth, height: price_chart.height, pricePerKm: price_chart.price_per_km, stayChargePerHour: price_chart.stay_charge_per_hour}
             ),
                 where: (price_chart.length >= ^(volume.length) and price_chart.breadth >= ^(volume.breadth) and price_chart.height >= ^(volume.height))
         query |> Cargo.Repo.all
