@@ -77,6 +77,18 @@ defmodule Cargo.Merchants do
   end
 end
 
+defmodule Cargo.MerchantUsers do
+  use Ecto.Schema
+
+  @primary_key{:id, :string, []}
+  schema "merchants_users" do
+    field :username, :string
+    field :password, :string
+    field :licence_number, :string
+  end
+
+end
+
 defmodule Cargo.Partners do
   use Ecto.Schema
 
@@ -132,6 +144,7 @@ end
 defmodule Cargo.Trips do
   use Ecto.Schema
 
+  @primary_key {:id, :integer, []}
   schema "trips" do
     field :start_date, Ecto.DateTime
     field :end_date, Ecto.DateTime
@@ -147,17 +160,6 @@ defmodule Cargo.Trips do
   end
 end
 
-defmodule Cargo.MerchantUsers do
-  use Ecto.Schema
-
-  @primary_key{:id, :string, []}
-  schema "merchants_users" do
-    field :username, :string
-    field :password, :string
-    field :licence_number, :string
-  end
-
-end
 defmodule Cargo.Vehicle do
   use Ecto.Schema
 
