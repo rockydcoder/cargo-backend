@@ -51,6 +51,7 @@ defmodule Cargo.Router.Trips do
             requires :vehicleName, type: String
             requires :priceCharged, type: Float
             requires :exclusiveCost, type: Float
+            requires :tripNo, type: Integer
         end
         post do
             DB.addTrip(params)

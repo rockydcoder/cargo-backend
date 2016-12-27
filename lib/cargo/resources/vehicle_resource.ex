@@ -22,11 +22,12 @@ defmodule Cargo.Router.Vehicles do
     namespace :new do
         @desc "add a new vehicle"
           params do
+            requires :regNo, type: String
             requires :vehicleName, type: String
             requires :driverName, type: String
             requires :baseLocation, type: String
             requires :currentLocation, type: String
-            requires :scheduledTrips, type: String
+            requires :scheduledTrips, type: Integer
           end
           post do
             DB.addVehicle(params)

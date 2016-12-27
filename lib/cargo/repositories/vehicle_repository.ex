@@ -60,6 +60,7 @@ defmodule Cargo.Repo.Vehicles do
 
   def addVehicle(params) do
     Cargo.Repo.insert! %Cargo.Vehicle {
+        reg_no: params[:regNo],
         driver_name: params[:driverName],
         vehicle_name: params[:vehicleName],
         base_location: params[:baseLocation],
@@ -67,4 +68,16 @@ defmodule Cargo.Repo.Vehicles do
         scheduled_trips: params[:scheduledTrips]
     }
   end
+
+  def fetchVehicleCount(params) do
+    # Aligned to Rules Version 1 - I#1
+     query = from vehicle in Cargo.Vehicle,
+     select: (
+        count(vehicle.reg_no)
+     ),
+     where: field(vehicle, :reg_no) == ^params.vehicleRegNo,
+     where: field(vehicle, :scheduled_trips) == ^params.tripNo
+    query |> Cargo.Repo.all
+  end
+
 end

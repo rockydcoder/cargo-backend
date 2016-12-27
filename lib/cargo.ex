@@ -68,25 +68,38 @@ end
 
 defmodule Cargo.Merchants do
   use Ecto.Schema
+  import Ecto.Changeset
 
   @primary_key{:licence_number, :string, []}
   schema "merchants" do
     field :company_name, :string
     field :merchant_name, :string
     field :contact_number, :string
+    field :status, :string
+  end
+
+  def changeset(merchant, params \\ %{}) do
+    merchant
+    |> cast(params, [:status])
   end
 end
 
 defmodule Cargo.MerchantUsers do
   use Ecto.Schema
+  import Ecto.Changeset
 
-  @primary_key{:id, :string, []}
+  @primary_key{:licence_number, :string, []}
   schema "merchants_users" do
     field :username, :string
     field :password, :string
-    field :licence_number, :string
   end
 
+  def changeset(user, params \\ %{}) do
+      user
+      |> cast(params, [:username, :password, :licence_number])
+      |> validate_required([:username, :password, :licence_number])
+      |> unique_constraint(:licence_number)
+  end
 end
 
 defmodule Cargo.Partners do
@@ -129,6 +142,15 @@ defmodule Cargo.PriceChart do
     end
 end
 
+defmodule Cargo.Sales do
+    use Ecto.Schema
+
+      @primary_key{:username, :string, []}
+      schema "sales_users" do
+        field :password, :string
+      end
+end
+
 defmodule Cargo.Transits do
   use Ecto.Schema
 
@@ -157,6 +179,7 @@ defmodule Cargo.Trips do
     field :vehicle_name, :string
     field :price_charged, :float
     field :exclusive_cost, :float
+    field :trip_no, :integer
   end
 end
 
